@@ -1,13 +1,14 @@
 import socket
 import struct
 import daiquiri
+import logging
 
 class multicast_message_sender(object):
 
     def __init__(self, group='224.1.1.1', port=5007):
         self.MCAST_GRP = group
         self.MCAST_PORT = port
-        self.logger = daiquiri.getLogger()
+        self.logger = daiquiri.getLogger(level=logging.DEBUG)
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
         self.sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32)
         self.logger.info("Starting MCast")

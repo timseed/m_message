@@ -26,19 +26,24 @@ def test_010_init_good():
     def lcl_send():
         global mcs
         for n in range(10):
-            mcs.send_msg()
+            mcs.send_msg(msg="Hi {}".format(n))
             time.sleep(0.2)
-        del mcs
 
-    d = multiprocessing.Process(name='server', target=lcl_send)
-    d.daemon = True
 
-    n = multiprocessing.Process(name='client', target=mm_receiver.read())
-    n.daemon = False
+    Server_Process = multiprocessing.Process(name='server', target=lcl_send)
+    Server_Process.daemon = True
+    Server_Process.start()
 
-    server_pid=d.start()
-    time.sleep(1)
-    client_pid=n.start()
 
-    time.sleep(5)
+    Client_Process = multiprocessing.Process(name='client', target=mm_receiver.read)
+    Client_Process.daemon = False
+
+
+    Client_Process.start()
+
+    Server_Process.join()
+    logger.info("Server Finished")
+    Client_Process.terminate()
+    logger.info("Client Finished")
+
     assert True
