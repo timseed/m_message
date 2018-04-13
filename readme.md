@@ -1,4 +1,4 @@
-#Multi Cast Classes
+# Multi Cast Classes
 
 I want to play with another product (Apache Nifi) to look at some multi-cast packet intereption. So first I needed a Server and a client.
 
@@ -8,10 +8,11 @@ I do not think there is much too special with this setup, the server is especial
 
 ## Jenkins
 
-As I continue to explore Jenkins, I did make ine of the tests more complex than normal.
+As I continue to explore Jenkins, I did make one of the tests more complex than normal.
 
 We need to use a Sender and receiver at the same time. So I used the multiprocessing module - with a custom internal method.
 
+This is the multiprocessing test.
 
 ```python 
 
